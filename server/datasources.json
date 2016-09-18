@@ -1,0 +1,15 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+
+  "monsherif": {
+    "name": "mydb",
+    "connector": "mongodb",
+    "host": "127.0.0.1", 
+    "database": "devDB", 
+    "port": 27017 
+	}
+
+}
