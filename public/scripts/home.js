@@ -30,8 +30,8 @@ var Comment = React.createClass({
 });
 
  // Begin CommentBox
-var CommentBox = React.createClass({
-  loadCommentsFromServer: function() {
+var AlertBox = React.createClass({
+  loadAlertsFromServer: function() {
     $.ajax({
       url: this.props.url,
       dataType: 'json',
@@ -71,14 +71,14 @@ var CommentBox = React.createClass({
     return {data: []};
   },
   componentDidMount: function() {
-    this.loadCommentsFromServer();
-    setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+    this.loadAlertsFromServer();
+    setInterval(this.loadAlertsFromServer, this.props.pollInterval);
   },
   render: function() {
     return (
       <div className="commentBox">
-        <h1>Comments</h1>
-        <CommentList data={this.state.data} />
+        <h1>Alerts</h1>
+        <AlertList data={this.state.data} />
         <CommentForm onCommentSubmit={this.handleCommentSubmit} />
       </div>
     );
@@ -86,25 +86,28 @@ var CommentBox = React.createClass({
 });
  // End CommentBox
 
-
-var CommentList = React.createClass({
+// Begining CommentList
+var AlertList = React.createClass({
 
   render: function() {
-    var commentNodes = this.props.data.map(function(comment) {
+    var alertNodes = this.props.data.map(function(alert) {
       return (
-        <Comment author={comment.message} key={comment.id}>
-          {comment.message}
+        <Comment author={alert.message} key={alert.id}>
+          {alert.recipients}
         </Comment>
       );
     });
     return (
-      <div className="commentList">
-        {commentNodes}
+      <div className="alertList">
+        {alertNodes}
       </div>
     );
   }
 });
 
+// End CommentList
+
+// Beginning AlertForm
 var CommentForm = React.createClass({
   getInitialState: function() {
     return {author: '', text: ''};
@@ -146,7 +149,9 @@ var CommentForm = React.createClass({
   }
 });
 
+// Ending AlertFrom
+
 ReactDOM.render(
-  <CommentBox url="api/alerts" pollInterval={2000} />,
+  <AlertBox url="api/alerts" pollInterval={2000} />,
   document.getElementById('content')
 );

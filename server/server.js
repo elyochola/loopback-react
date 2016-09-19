@@ -47,7 +47,7 @@ app.get('/api/alerts', function(req, res) {
 
 });
 
-app.post('/api/comments', function(req, res) {
+app.post('/api/alerts', function(req, res) {
   fs.readFile(COMMENTS_FILE, function(err, data) {
     if (err) {
       console.error(err);
