@@ -29,6 +29,7 @@ var Comment = React.createClass({
   }
 });
 
+ // Begin CommentBox
 var CommentBox = React.createClass({
   loadCommentsFromServer: function() {
     $.ajax({
@@ -66,6 +67,7 @@ var CommentBox = React.createClass({
     });
   },
   getInitialState: function() {
+
     return {data: []};
   },
   componentDidMount: function() {
@@ -82,13 +84,16 @@ var CommentBox = React.createClass({
     );
   }
 });
+ // End CommentBox
+
 
 var CommentList = React.createClass({
+
   render: function() {
     var commentNodes = this.props.data.map(function(comment) {
       return (
-        <Comment author={comment.author} key={comment.id}>
-          {comment.text}
+        <Comment author={comment.message} key={comment.id}>
+          {comment.message}
         </Comment>
       );
     });
@@ -142,6 +147,6 @@ var CommentForm = React.createClass({
 });
 
 ReactDOM.render(
-  <CommentBox url="/api/comments" pollInterval={2000} />,
+  <CommentBox url="api/alerts" pollInterval={2000} />,
   document.getElementById('content')
 );
