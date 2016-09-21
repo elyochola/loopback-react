@@ -1,15 +1,5 @@
-/**
- * This file provided by Facebook is for non-commercial testing and evaluation
- * purposes only. Facebook reserves all rights not expressly granted.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
- * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
- * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
 
+// Begin Alert - smaller component
 var Alert = React.createClass({
   rawMarkup: function() {
     var md = new Remarkable();
@@ -19,15 +9,17 @@ var Alert = React.createClass({
 
   render: function() {
     return (
-      <div className="comment">
-        <h2 className="commentAuthor">
-          {this.props.message}
-        </h2>
-        <span dangerouslySetInnerHTML={this.rawMarkup()} />
+      <div className="comment col-sm-4">
+        <p className="alertMessage">
+          message : {this.props.message}
+        </p>
+          message : {this.props.recipients}
       </div>
     );
   }
 });
+
+// EndAlert
 
  // Begin AlertBox
 var AlertBox = React.createClass({
@@ -93,8 +85,7 @@ var AlertList = React.createClass({
   render: function() {
     var alertNodes = this.props.data.map(function(alert) {
       return (
-        <Alert message={alert.message} key={alert.id}>
-          {alert.recipients}
+        <Alert message={alert.message} recipients={alert.recipients}>
         </Alert>
       );
     });
@@ -132,7 +123,7 @@ var AlertForm = React.createClass({
   },
   render: function() {
     return (
-      <form className="commentForm" onSubmit={this.handleSubmit}>
+      <form className="commentForm col-sm-12 text-center" onSubmit={this.handleSubmit}>
         <input
           type="text"
           placeholder="Message"
@@ -145,13 +136,15 @@ var AlertForm = React.createClass({
           value={this.state.recipients}
           onChange={this.handleRecipientsChange}
         />
-        <input type="submit" value="Post" />
+        <input type="submit" value="Post" className="btn-success" />
       </form>
     );
   }
 });
 
 // Ending AlertFrom
+
+// ReacDOM.render which render view inside a div 
 
 ReactDOM.render(
   <AlertBox url="api/alerts" pollInterval={2000} />,
