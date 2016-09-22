@@ -32,12 +32,16 @@ app.start = function() {
 app.get('/api/alerts', function(req, res) {
   app.models.Alert.find( function (err, data) {
     res.json(data);
-    // console.log(data);
   });
 });
 
 app.post('/api/alerts', function(req, res) {
   app.models.Alert.create([{message: req.body.message, recipients: [req.body.recipients] } ])
+});
+
+app.delete('/api/alerts/:id', function(req, res) {
+  var id = req.params.id
+  app.models.Alert.remove({id: id})
 });
 
 // Bootstrap the application, configure models, datasources and middleware.
