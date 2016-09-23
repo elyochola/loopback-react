@@ -1,5 +1,51 @@
+// Begin AlertModal
+  var AlertModal = React.createClass({
 
-// Begin Alert - smaller component
+    getInitialState: function() {
+      return {modal: "modal fade"};
+    },
+
+    openModal: function() {
+       console.log(this); 
+       this.setState({modal: "modal show"});
+    },
+    
+    
+    render: function() {
+      return (
+        <div className={this.state.modal} id={this.props.alertId}>
+            <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 className="modal-title">Modal title</h4>
+              </div>
+              <div className="modal-body">
+                <p>One fine body&hellip;</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" className="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  })
+
+
+
+// Ending AlertModal
+
+
+
+
+
+
+// Begin Alert 
 var Alert = React.createClass({
   rawMarkup: function() {
     var md = new Remarkable();
@@ -8,27 +54,41 @@ var Alert = React.createClass({
   },
 
 
-  handleClick: function () {
+  handleDelete: function () {
     $.ajax({
-      url: 'api/alerts/57e2c257f68b0c3cfd59796a'  ,
+      url: 'api/alerts/' + this.props.id.toString(),
       dataType: 'json',
-      type: 'DELETE'
-    });
-     
+      type: 'DELETE',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    }); 
   },
+
+  handleEdit: function() {
+    this.refs.alertModal.openModal()
+  },
+
 
   render: function() {
     return (
       <div className="comment col-sm-4">
+        <AlertModal alertId={this.props.id} ref="alertModal"/>
         <p className="alertMessage">
           message : {this.props.message}
-          <a className="pull-right" onClick={this.handleClick}>delete</a>
+          <a className="" onClick={this.handleEdit}>edit</a>
+          <a className="pull-right" onClick={this.handleDelete}>delete</a>
         </p>
           recipients : {this.props.recipients}
       </div>
     );
   }
 });
+
 
 // EndAlert
 
@@ -66,25 +126,7 @@ var AlertBox = React.createClass({
     });
   },
 
-  handleAlertDelete: function(alert) {
-    var alert = alert
-    $.ajax({
-      url: 'api/alerts/' + 1 ,
-      dataType: 'json',
-      type: 'POST',
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        this.setState({data: alert});
-        console.error("this.props.url, status, err.toString()");
-      }.bind(this)
-    });
-  },
-
-
-
-
+ 
 
   getInitialState: function() {
 

@@ -41,7 +41,10 @@ app.post('/api/alerts', function(req, res) {
 
 app.delete('/api/alerts/:id', function(req, res) {
   var id = req.params.id
-  app.models.Alert.remove({id: id})
+  app.models.Alert.remove({id: id}, function(err,data) {
+    res.json({message: 'deleted'})
+  })
+
 });
 
 // Bootstrap the application, configure models, datasources and middleware.
