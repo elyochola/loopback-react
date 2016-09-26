@@ -2,12 +2,27 @@
   var AlertModal = React.createClass({
 
     getInitialState: function() {
-      return {modal: "modal fade"};
+      return {modal: "modal fade", 
+              message: this.props.alert.message, 
+              recipients: this.props.alert.recipients,
+              alertId: this.props.alert.id, 
+            };
     },
 
     openModal: function() {
-       console.log(this); 
        this.setState({modal: "modal show"});
+    },
+
+    closeModal: function() {
+      this.setState({modal: "modal hide"});  
+    },
+
+    handleMessageChange: function(e) {
+      this.setState({message: e.target.value});
+    },
+
+    handleRecipientsChange: function(e) {
+      this.setState({recipients: e.target.value});
     },
     
     
@@ -17,16 +32,30 @@
             <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.closeModal}>
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 className="modal-title">Modal title</h4>
+                <h4 className="modal-title">Alerte {this.state.alertId}</h4>
               </div>
               <div className="modal-body">
-                <p>One fine body&hellip;</p>
+                <form className="col-sm-12 text-center" onSubmit={this.handleSubmit}>
+                  <div className="form-group">
+                    <input 
+                      name="message" 
+                      type="text" 
+                      value={this.state.message}
+                      onChange={this.handleMessageChange} />
+                  </div> 
+                  <div className="form-group">
+                    <input 
+                      name="recipients" 
+                      type="text" 
+                      value={this.state.recipients} 
+                      onChange={this.handleRecipientsChange} />
+                  </div> 
+                </form>  
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" className="btn btn-primary">Save changes</button>
               </div>
             </div>
@@ -77,7 +106,7 @@ var Alert = React.createClass({
   render: function() {
     return (
       <div className="comment col-sm-4">
-        <AlertModal alertId={this.props.id} ref="alertModal"/>
+        <AlertModal alert={this.props} ref="alertModal"/>
         <p className="alertMessage">
           message : {this.props.message}
           <a className="" onClick={this.handleEdit}>edit</a>
