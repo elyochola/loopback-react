@@ -39,6 +39,14 @@ app.post('/api/alerts', function(req, res) {
   app.models.Alert.create([{message: req.body.message, recipients: [req.body.recipients] } ])
 });
 
+app.patch('api/alerts/:id', function(req, res) {
+  var id = req.params.id
+  app.models.Alert.updateOne(
+   { "_id": "57e2c0d2f68b0c3cfd597963" },
+   {$set: { "messsage": req.body.message }}
+  )
+});
+
 app.delete('/api/alerts/:id', function(req, res) {
   var id = req.params.id
   app.models.Alert.remove({id: id}, function(err,data) {

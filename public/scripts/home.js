@@ -24,6 +24,26 @@
     handleRecipientsChange: function(e) {
       this.setState({recipients: e.target.value});
     },
+
+    handleSubmit: function(e) {
+      e.preventDefault();
+      console.log('coucou');
+      console.log(this);
+      var alert = {message: this.state.message, recipients: this.state.recipients, id: this.state.alertId};
+      $.ajax({
+        url: 'api/alerts/' + this.state.alertId.toString(),
+        dataType: 'json',
+        type: 'PATCH',
+        data: alert,
+        success: function(data) {
+          this.setState({message: this.state.message, recipients: this.state.recipients, id: this.state.alertId});
+        }.bind(this),
+        error: function(xhr, status, err) {
+          this.setState({data: alerts});
+          console.error(this.props.url, status, err.toString());
+        }.bind(this)
+      });
+    },
     
     
     render: function() {
@@ -38,7 +58,7 @@
                 <h4 className="modal-title">Alerte {this.state.alertId}</h4>
               </div>
               <div className="modal-body">
-                <form className="col-sm-12 text-center" onSubmit={this.handleSubmit}>
+                <form className="text-center" onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <input 
                       name="message" 
@@ -53,10 +73,10 @@
                       value={this.state.recipients} 
                       onChange={this.handleRecipientsChange} />
                   </div> 
+                   <div className="modal-footer">
+                    <input type="submit" value="Submit" className="btn btn-success" />
+                  </div>
                 </form>  
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-primary">Save changes</button>
               </div>
             </div>
           </div>
