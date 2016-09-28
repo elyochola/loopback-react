@@ -7,8 +7,6 @@ var boot = require('loopback-boot');
 
 var app = module.exports = loopback();
 
-var COMMENTS_FILE = path.join(__dirname, 'comments.json');
-
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(path.join(__dirname, '../public')));
@@ -42,8 +40,8 @@ app.post('/api/alerts', function(req, res) {
 app.patch('api/alerts/:id', function(req, res) {
   var id = req.params.id
   app.models.Alert.updateOne(
-   { "_id": "57e2c0d2f68b0c3cfd597963" },
-   {$set: { "messsage": req.body.message }}
+   { "_id": req.params.id },
+   {$set: { messsage: req.body.message, recipients: req.body.recipients }}
   )
 });
 

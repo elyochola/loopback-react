@@ -27,16 +27,18 @@
 
     handleSubmit: function(e) {
       e.preventDefault();
-      console.log('coucou');
-      console.log(this);
-      var alert = {message: this.state.message, recipients: this.state.recipients, id: this.state.alertId};
+      var alert = {message: this.state.message, recipients: [this.state.recipients], id: this.state.alertId};
       $.ajax({
         url: 'api/alerts/' + this.state.alertId.toString(),
         dataType: 'json',
         type: 'PATCH',
         data: alert,
         success: function(data) {
-          this.setState({message: this.state.message, recipients: this.state.recipients, id: this.state.alertId});
+          this.setState({message: this.state.message, 
+                         recipients: this.state.recipients,
+                         id: this.state.alertId,
+                         modal: "modal hide"
+                       });
         }.bind(this),
         error: function(xhr, status, err) {
           this.setState({data: alerts});
