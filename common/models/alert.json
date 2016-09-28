@@ -11,9 +11,7 @@
       "type": "string"
     },
     "recipients": {
-      "type": [
-        "string"
-      ]
+      "type": "string"
     }
   },
   "validations": [],

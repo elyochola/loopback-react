@@ -33,15 +33,12 @@
         dataType: 'json',
         type: 'PATCH',
         data: alert,
-        success: function(data) {
-          this.setState({message: this.state.message, 
-                         recipients: this.state.recipients,
-                         id: this.state.alertId,
-                         modal: "modal hide"
-                       });
+        success: function() {
+          console.log(this)
+          this.setState({data: this.state.data});
         }.bind(this),
         error: function(xhr, status, err) {
-          this.setState({data: alerts});
+          this.setState({data: this.state.data});
           console.error(this.props.url, status, err.toString());
         }.bind(this)
       });
