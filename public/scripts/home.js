@@ -92,10 +92,6 @@
 // Ending AlertModal
 
 
-
-
-
-
 // Begin Alert 
 var Alert = React.createClass({
   rawMarkup: function() {
