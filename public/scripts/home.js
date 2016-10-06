@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 export default class AlertModal extends Component {
 
 
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
 
     this.state = {
         modal: "modal fade", 
@@ -12,13 +12,62 @@ export default class AlertModal extends Component {
         recipients: this.props.alert.recipients,
         alertId: this.props.alert.id, 
     };
+    this.handleMessageChange = this.handleChange.bind(this);
+
   };
+
+  openModal() {
+    this.setState({modal: "modal show"});
+  }
+
+  closeModal() {
+    this.setState({modal: "modal hide"}); 
+  }
+
+  handleMessageChange(e) {
+    this.setState({message: e.target.value});
+  }
+
+  handleRecipientsChange(e) {
+    this.setState({recipients: e.target.value});
+  }
+
 
     render() {
         return (
-            <header>
-                <h1>This is the header section</h1>
-            </header>
+        <div className={this.state.modal} id={this.props.alertId}>
+            <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.closeModal}>
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 className="modal-title">Alerte {this.state.alertId}</h4>
+              </div>
+              <div className="modal-body">
+                <form className="text-center" onSubmit={this.handleSubmit}>
+                  <div className="form-group">
+                    <input 
+                      name="message" 
+                      type="text" 
+                      value={this.state.message}
+                      onChange={this.handleMessageChange} />
+                  </div> 
+                  <div className="form-group">
+                    <input 
+                      name="recipients" 
+                      type="text" 
+                      value={this.state.recipients} 
+                      onChange={this.handleRecipientsChange} />
+                  </div> 
+                   <div className="modal-footer">
+                    <input type="submit" value="Submit" className="btn btn-success" />
+                  </div>
+                </form>  
+              </div>
+            </div>
+          </div>
+        </div>
         );
     }
 }
