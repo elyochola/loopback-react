@@ -5,7 +5,10 @@ var bodyParser = require('body-parser');
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 var webpack = require('webpack');
-var config = require('../webpack.config.dev');
+var config = require('../webpack.config');
+var webpackDevMiddleware = require('webpack-dev-middleware')
+var webpackHotMiddleware = require('webpack-hot-middleware')
+var compiler = webpack(config);
 
 var app = module.exports = loopback();
 
@@ -15,14 +18,12 @@ app.use('/', express.static(path.join(__dirname, '../public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-var compiler = webpack(config);
 
-app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
-}));
 
-app.use(require('webpack-hot-middleware')(compiler));
+
+
+app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
+app.use(webpackHotMiddleware(compiler));
 
 // nodemon --exec babel-node .
 
