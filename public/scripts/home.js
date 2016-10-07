@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 
 
-export default class AlertModal extends Component {
+export class AlertModal extends Component {
 
   constructor(props) {
     super(props);
@@ -47,6 +47,7 @@ export default class AlertModal extends Component {
         success: function() {
           console.log(this)
           this.setState({data: this.state.data});
+
         }.bind(this),
         error: function(xhr, status, err) {
           this.setState({data: this.state.data});
@@ -316,7 +317,4 @@ export class AlertForm extends Component {
 
 // ReacDOM.render which render view inside a div 
 
-ReactDOM.render(
-  <AlertBox url="api/alerts" pollInterval={2000}  />,
-  document.getElementById('content')
-);
+
