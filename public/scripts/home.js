@@ -12,7 +12,7 @@ export default class AlertModal extends Component {
         recipients: this.props.alert.recipients,
         alertId: this.props.alert.id, 
     };
-    this.handleMessageChange = this.handleChange.bind(this);
+    // this.handleMessageChange = this.handleChange.bind(this);
 
   };
 
