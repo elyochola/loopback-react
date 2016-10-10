@@ -176,7 +176,7 @@ export class AlertBox extends Component {
 
   loadAlertsFromServer() {
     $.ajax({
-      url: this.props.url,
+      url: this.props.route.url,
       dataType: 'json',
       cache: false,
       success: function(data) {
@@ -193,7 +193,7 @@ export class AlertBox extends Component {
     var newalerts = alerts.concat([alert]);
     this.setState({data: newalerts});
     $.ajax({
-      url: this.props.url,
+      url: this.props.route.url,
       dataType: 'json',
       type: 'POST',
       data: alert,
@@ -211,7 +211,7 @@ export class AlertBox extends Component {
 
   componentDidMount() {
     this.loadAlertsFromServer();
-    setInterval(this.loadAlertsFromServer, this.props.pollInterval);
+    setInterval(this.loadAlertsFromServer, this.props.route.pollInterval);
   }
 
   render() {
@@ -312,6 +312,7 @@ export class AlertForm extends Component {
     );
   }
 }
+
 
 // Ending AlertFrom
 
