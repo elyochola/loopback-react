@@ -3,13 +3,11 @@
     "name": "db",
     "connector": "memory"
   },
-
   "monsherif": {
-    "name": "mydb",
-    "connector": "mongodb",
-    "host": "127.0.0.1", 
-    "database": "devDB", 
-    "port": 27017 
-	}
-
+    "host": "127.0.0.1",
+    "port": 27017,
+    "database": "devDB",
+    "name": "monsherif",
+    "connector": "mongodb"
+  }
 }

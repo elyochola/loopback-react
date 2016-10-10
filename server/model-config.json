@@ -35,5 +35,9 @@
   "Alert": {
     "dataSource": "monsherif",
     "public": true
+  },
+  "appUser": {
+    "dataSource": "monsherif",
+    "public": true
   }
 }

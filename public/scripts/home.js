@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import {Router, Route, Link , browserHistory} from 'react-router';
 import ReactDOM from 'react-dom';
 
 
@@ -169,23 +170,27 @@ export class AlertBox extends Component {
   constructor(props) {
     super(props);
     this.state = {data: []} ;
-    this.loadAlertsFromServer = this.loadAlertsFromServer.bind(this);
-    this.handleAlertSubmit    = this.handleAlertSubmit.bind(this);
-    this.componentDidMount    = this.componentDidMount.bind(this);
+    this.loadAlertsFromServer     = this.loadAlertsFromServer.bind(this);
+    this.handleAlertSubmit        = this.handleAlertSubmit.bind(this);
+    this.componentDidMount        = this.componentDidMount.bind(this);
+    this.componentWillUnmount     = this.componentWillUnmount.bind(this);
   }
 
   loadAlertsFromServer() {
-    $.ajax({
-      url: this.props.route.url,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+    console.log(this)
+    if (this.state.mounted = true) {
+      $.ajax({
+        url: this.props.route.url,
+        dataType: 'json',
+        cache: false,
+        success: function(data) {
+          this.setState({data: data});
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+        }.bind(this)
+      });
+    }  
   }
 
   handleAlertSubmit(alert) {
@@ -205,19 +210,27 @@ export class AlertBox extends Component {
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
-  }
+  } 
 
 
 
   componentDidMount() {
+    this.state = {mounted: true}
     this.loadAlertsFromServer();
     setInterval(this.loadAlertsFromServer, this.props.route.pollInterval);
+  }
+
+  componentWillUnmount() {
+    console.log('unmounted')
+    this.state = {mounted: false}
+    console.log(this)
   }
 
   render() {
     return (
       <div className="alertBox content">
         <h1>Alerts</h1>
+        <Link to="/api/appUsers" onClick={this.componentWillUnmount}>Registration</Link>
         <div className="col-sm-9">
           <AlertList data={this.state.data} />
         </div>  

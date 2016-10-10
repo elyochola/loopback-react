@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
 import {Router, Route, Link , browserHistory} from 'react-router';
 import {Alert, AlertBox,AlertList, AlertForm, AlertModal} from './home';
-import {User} from './users';
+import {RegistrationForm} from './registration';
 
 
 
 ReactDOM.render(
   <Router history={browserHistory}>
    <Route path="/" component={AlertBox} url="api/alerts" pollInterval={2000}/>
-    <Route path="/user" component={User}  />
+    <Route path="/api/appUsers" component={RegistrationForm}  />
 
   </Router>,
   document.getElementById('content')
