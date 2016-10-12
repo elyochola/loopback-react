@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Router, Route, Link , browserHistory} from 'react-router';
 import ReactDOM from 'react-dom';
-
+;
 
 export class AlertModal extends Component {
 
@@ -169,7 +169,7 @@ export  class Alert extends Component {
 export class AlertBox extends Component {
   constructor(props) {
     super(props);
-    this.state = {data: []} ;
+    this.state = {data: [], mounted: true} ;
     this.loadAlertsFromServer     = this.loadAlertsFromServer.bind(this);
     this.handleAlertSubmit        = this.handleAlertSubmit.bind(this);
     this.componentDidMount        = this.componentDidMount.bind(this);
@@ -177,8 +177,7 @@ export class AlertBox extends Component {
   }
 
   loadAlertsFromServer() {
-    console.log(this)
-    if (this.state.mounted = true) {
+    if (!this.isUnmounted) {
       $.ajax({
         url: this.props.route.url,
         dataType: 'json',
@@ -215,15 +214,12 @@ export class AlertBox extends Component {
 
 
   componentDidMount() {
-    this.state = {mounted: true}
     this.loadAlertsFromServer();
     setInterval(this.loadAlertsFromServer, this.props.route.pollInterval);
   }
 
   componentWillUnmount() {
-    console.log('unmounted')
-    this.state = {mounted: false}
-    console.log(this)
+    this.isUnmounted = true;
   }
 
   render() {

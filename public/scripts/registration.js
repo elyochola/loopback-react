@@ -12,20 +12,17 @@ export class RegistrationForm extends Component {
                   <div className="form-group">
                     <input
                       type="text"
-                      placeholder="Message"
-                      size="200"
+                      placeholder="Password"
                       className="form-control"
-                      // value={this.state.message}
-                      // onChange={this.handleMessageChange}
+         
                     />
                   </div> 
                   <div className="form-group">   
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Recipients"
-                      // value={this.state.recipients}
-                      // onChange={this.handleRecipientsChange}
+                      placeholder="Password"
+
                     />
                   </div> 
                   <div className="form-group">  
