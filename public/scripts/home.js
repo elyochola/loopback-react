@@ -124,7 +124,6 @@ export  class Alert extends Component {
 
   loadAlertsFromServer() {
     console.log(this.props);
-    console.log('coucou');
   }
 
   handleDelete() {
