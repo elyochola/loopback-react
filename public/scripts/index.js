@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
 import {Router, Route, Link , browserHistory} from 'react-router';
 import {Alert, AlertBox,AlertList, AlertForm, AlertModal} from './home';
-import {RegistrationForm} from './registration';
+import {RegistrationForm} from './registrations';
 
 
 
