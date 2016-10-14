@@ -11,7 +11,7 @@ ReactDOM.render(
   <Router history={browserHistory}>
    <Route path="/" component={AlertBox} url="api/alerts" pollInterval={2000}/>
     <Route path="/api/appUsers" component={RegistrationForm} url="/api/appUsers"  />
-
+    
   </Router>,
   document.getElementById('content')
 );
