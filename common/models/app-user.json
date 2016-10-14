@@ -7,7 +7,13 @@
   },
   "properties": {},
   "validations": [],
-  "relations": {},
+  "relations": {
+    "accessTokens": {
+      "model": "AccessToken",
+      "type": "hasMany",
+      "foreignKey": "userId"
+    }
+  },
   "acls": [],
   "methods": {}
 }

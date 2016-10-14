@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 
 
-export class RegistrationForm extends Component {
+export class RegistrationsForm extends Component {
 
   constructor(props){
     super(props);
@@ -11,7 +11,6 @@ export class RegistrationForm extends Component {
         email: '',
         password: '' 
     };
-
     this.handleEmailChange    = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleFormSubmit     = this.handleFormSubmit.bind(this);
@@ -31,7 +30,8 @@ export class RegistrationForm extends Component {
     elem.preventDefault();
     var user = {email: this.state.email, password: this.state.password}
     $.ajax({url: this.props.route.url , dataType:'json', type:'POST', data:user, cache: false,
-      success: function() {console.log('request done')}.bind(this),
+      success: function(response) { console.log(document.cookie)
+                                    console.log('request done')}.bind(this),
       error: function() {console.log('fail')}.bind(this)
 
     });
@@ -42,6 +42,7 @@ export class RegistrationForm extends Component {
 
 
     render() {
+
         return (
               <form className="text-center col-sm-12" onSubmit={this.handleFormSubmit} >
                   <h3>Registration</h3>

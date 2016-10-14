@@ -4,41 +4,27 @@ module.exports = function(Appuser) {
 
 
 
-   Appuser.afterRemote('create', (req, res) => {
-    
-    Appuser.remoteMethod(registrationLogin(req.result.email, req.result.password, {
-                            returns: [
-                              { arg: 'bodyStream', type: 'stream', root: true },
-                              { arg: 'content-type', type: 'string', http: { target: 'header' } }
-                            ]
-                          } ))
-    
-   });
+Appuser.afterRemote('create', function(context, userInstance, next) {
 
-
-   function registrationLogin(email, password, cb) {
-    Appuser.login(
-        {email: email, password: password},
-        (err, token) => {
-
-          if (err) {console.log('fail to login Appuser')};
-          cb();
-        }
+      Appuser.login({"email": userInstance.email,"password": context.args.data.password},
+                    (err, token) => {
+                      if (err) {console.log('fail to login Appuser')};
+                      console.log(token);
+                      // context.res.setHeader("Set-Cookie",'userId='+ token.userId);
+                      // context.res.setHeader("Set-Cookie",'id='+ token.id);
+                      // Encryption like password?
+                      context.res.cookie('access_token', token.userId.id, {
+                                         signed: context.req.signedCookies ? true : false,
+                                        });
+                      context.res.json(token);
+                    }
       );
-   }
+
+      
+  
+  }); 
 
 
-//    function streaming(cb) {
-//   var bodyStream = // create response stream from file
-//   var contentType = // set from file extension
-//   cb(null, bodyStream, contentType);
-// }
 
-// loopback.remoteMethod(streaming, {
-//   returns: [
-//     { arg: 'bodyStream', type: 'stream', root: true },
-//     { arg: 'content-type', type: 'string', http: { target: 'header' } }
-//   ]
-// });
 
 };
