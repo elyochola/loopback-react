@@ -22,7 +22,9 @@
     "loopback-datasource-juggler": "^2.39.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
+    "redux": "^3.6.0",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^1.0.1"
   },
@@ -36,6 +38,7 @@
     "eslint": "^2.5.3",
     "express": "^4.14.0",
     "nsp": "^2.1.0",
+    "redux-devtools": "^3.3.1",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.3",
     "webpack-hot-middleware": "^2.12.2"

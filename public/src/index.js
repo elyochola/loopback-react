@@ -6,9 +6,11 @@ import {Alert, AlertBox,AlertList, AlertForm, AlertModal} from './home';
 import {RegistrationsForm} from './registrations';
 import {SessionsForm} from './sessions';
 import {App} from './app';
-
+import createStore  from 'redux'
 
 // url="api/alerts" pollInterval={2000}
+
+const store = createStore(App)
 
 ReactDOM.render(
   <Router history={browserHistory}>
@@ -19,5 +21,3 @@ ReactDOM.render(
   </Router>,
   document.getElementById('content')
 );
-
-

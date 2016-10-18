@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import {RegistrationsForm} from './registrations';
 import {SessionsForm} from './sessions';
 
+
+
 export class App extends Component {
 
   render () {
