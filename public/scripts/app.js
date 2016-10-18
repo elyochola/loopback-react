@@ -16,7 +16,7 @@ export class App extends Component {
                 </ul>
               </div>
               <div className=" row text-center">
-                  <h1> WELCOME ON MON SHERIF FOR USERS </h1>
+                  <h1> WELCOME ON STRONGLOOP REACT FOR USERS </h1>
               </div>
             </div>  
            ) 

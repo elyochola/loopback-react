@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Router, Route, Link , browserHistory} from 'react-router';
 import ReactDOM from 'react-dom';
-;
+
 
 export class AlertModal extends Component {
 
