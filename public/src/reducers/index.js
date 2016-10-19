@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
-import {App} from 'public/src/app';
+import alerts from './alerts';
 
-const rootReducer = combineReducers({
-  App
+export const rootReducer = combineReducers({
+  alerts
 })
 
-export default rootReducer
+
+
