@@ -4,26 +4,23 @@ import {Router, Route, Link , browserHistory} from 'react-router';
 import ReactDOM from 'react-dom';
 import {RegistrationsForm} from './registrations';
 import {SessionsForm} from './sessions';
-import MainSection from './components/mainSection'
-import * as TodoActions from './actions'
+import {Navbar} from './components/navbar';
+import {MainSection} from './components/mainSection'
 
+// https://github.com/auth0-blog/redux-auth/blob/master/reducers.js
 
-
-
-const App = ({todos, actions}) => (
-           <div>
-            <div className="row">
-              <ul>
-                 <Link to="/api/appUsers" className='btn btn-primary pull-right '  >Registration</Link>
-                 <Link to="/api/appUsers/login" className='btn btn-primary pull-right mr20' >Session</Link>
-              </ul>
-            </div>
-            <div className=" row text-center">
-                <h1> WELCOME ON STRONGLOOP REACT FOR USERS </h1>
-            </div>
+class App extends Component {
+  
+  render() {
+    const { dispatch, quote, isAuthenticated, errorMessage, isSecretQuote } = this.props
+    return (
+          <div>
+             <Navbar isAuthenticated={isAuthenticated} errorMessage={errorMessage} dispatch={dispatch}/> 
+             <MainSection/>
           </div> 
- 
-)
+    )
+  }
+}
 
 
 const mapStateToProps = (state) => {
@@ -32,11 +29,20 @@ const mapStateToProps = (state) => {
    }
 };
 const mapDispatchToProps = (dispatch) => {
-   return {
-
-   }
+  const { isAuthenticated, errorMessage } = auth
+  
+  return {
+    isAuthenticated,
+    errorMessage
+  }
 };
 
 export default connect(mapStateToProps)(App);
 
 
+            // <div className="row">
+            //   <ul>
+            //      <Link to="/api/appUsers" className='btn btn-primary pull-right '  >Registration</Link>
+            //      <Link to="/api/appUsers/login" className='btn btn-primary pull-right mr20' >Session</Link>
+            //   </ul>
+            // </div>
