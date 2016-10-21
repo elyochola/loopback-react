@@ -1,4 +1,4 @@
-// import { CALL_API } from './middleware/api'
+import { CALL_API } from '../middlewares/api'
 
 // There are three possible states for our login
 // process and we need actions for each of them
@@ -64,13 +64,13 @@ export function loginUser(creds) {
   let config = {
     method: 'POST',
     headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-    body: `username=${creds.username}&password=${creds.password}`
+    body: `email=${creds.username}&password=${creds.password}`
   }
   
   return dispatch => {
     // We dispatch requestLogin to kickoff the call to the API
     dispatch(requestLogin(creds))
-    return fetch('http://localhost:3000/api/login', config)
+    return fetch('http://localhost:3000/api/appUsers/login', config)
       .then(response =>
         response.json()
         .then(user => ({ user, response }))

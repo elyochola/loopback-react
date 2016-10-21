@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
-import {Router, Route, Link , browserHistory} from 'react-router';
 import ReactDOM from 'react-dom';
 import {RegistrationsForm} from './registrations';
 import {SessionsForm} from './sessions';
