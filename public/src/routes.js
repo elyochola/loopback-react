@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import {RegistrationsForm} from './registrations';
 import Login from './components/login';
 import App from './app';
+// import { loginUser, logoutUser } from './actions/index'
 
 
 export class Routes extends Component {
@@ -13,7 +14,7 @@ export class Routes extends Component {
             <Router history={browserHistory}>
               <Route path="/" component={App}/>
               <Route path="/api/appUsers" component={RegistrationsForm} url="/api/appUsers"  />
-              <Route path="/api/appUsers/login" component={Login} url="/api/appUsers/login"  />
+              <Route path="/api/appUsers/login" component={Login} url="/api/appUsers/login"   />
             </Router>
            ) 
 

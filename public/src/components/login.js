@@ -1,7 +1,13 @@
-
+import {connect} from 'react-redux'
 import React, { Component, PropTypes } from 'react'
 
-export default class Login extends Component {
+class Login extends Component {
+
+  constructor (props) {
+    super(props)
+
+    this.onLoginClick = this.onLoginClick.bind(this)
+  }
   
   render() {
     const { errorMessage } = this.props
@@ -25,8 +31,18 @@ export default class Login extends Component {
     const username = this.refs.username
     const password = this.refs.password
     const creds = { username: username.value.trim(), password: password.value.trim() }
-    this.props.onLoginClick(creds)
+    console.log(this)
+    this.onLoginClick(creds)
   }
+
+  onLoginClick(creds) {
+    console.log('coucou')
+  }
+
+
+
+
+
 }
 
 Login.propTypes = {
@@ -36,10 +52,7 @@ Login.propTypes = {
 
 
 
-
-
-
-
+export default connect()(Login)
 
 
 

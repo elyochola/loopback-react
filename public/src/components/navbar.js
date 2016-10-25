@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import {Router, Route, Link , browserHistory} from 'react-router';
 import Login from './login'
 import Logout from './logout'
-import { loginUser, logoutUser } from '../actions/index'
+
 
 // export class Navbar extends Component {
   
