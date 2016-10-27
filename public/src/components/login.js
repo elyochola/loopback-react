@@ -1,6 +1,7 @@
 import {connect} from 'react-redux'
 import React, { Component, PropTypes } from 'react'
-
+import {loginUser} from '../actions/index'
+// https://github.com/sotojuan/saga-login-flow/blob/master/app/components/Login.js
 class Login extends Component {
 
   constructor (props) {
@@ -13,30 +14,38 @@ class Login extends Component {
     const { errorMessage } = this.props
     
     return (
-      <div>
-        <input type='text' ref='username' className="form-control" style={{ marginRight: '5px' }} placeholder='Username'/>
-        <input type='password' ref='password' className="form-control" style={{ marginRight: '5px' }} placeholder='Password'/>
-        <button onClick={(event) => this.handleClick(event)} className="btn btn-primary">
-          Login
-        </button>
-        
+      <form className="text-center col-sm-6 col-sm-offset-3 white-bg" >
+        <h2> Sign in </h2>
+        <div className="form-group">   
+          <input type='text' ref='username' className="form-control" style={{ marginRight: '5px' }} placeholder='Username'/>
+        </div>
+        <div className="form-group">   
+          <input type='password' ref='password' className="form-control" style={{ marginRight: '5px' }} placeholder='Password'/>
+        </div>
+        <div className="form-group">   
+          <button onClick={(event) => this.handleClick(event)} className="btn btn-success">
+            Login
+          </button>
+        </div>
         {errorMessage &&
           <p style={{color:'red'}}>{errorMessage}</p>
         }
-      </div>
+      </form>
     )
   }
+
+
   
   handleClick(event) {
     const username = this.refs.username
     const password = this.refs.password
     const creds = { username: username.value.trim(), password: password.value.trim() }
-    console.log(this)
     this.onLoginClick(creds)
   }
 
   onLoginClick(creds) {
-    console.log('coucou')
+    this.props.dispatch(loginUser(creds))
+    console.log(this.props.gets)
   }
 
 

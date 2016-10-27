@@ -7,7 +7,6 @@ import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
 import {RegistrationsForm} from './registrations';
 import {Alert, AlertBox,AlertList, AlertForm, AlertModal} from './home';
-import {SessionsForm} from './sessions';
 import {createStore, applyMiddleware} from 'redux'
 import {rootReducer} from './reducers'
 import {Routes} from './routes'

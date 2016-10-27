@@ -1,7 +1,9 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../actions/index'
 
 
-function auth(state = {
+
+
+export default function auth(state = {
     isFetching: false,
     isAuthenticated: localStorage.getItem('id_token') ? true : false
   }, action) {
@@ -33,6 +35,5 @@ function auth(state = {
       return state
     }
 }
-
 
 

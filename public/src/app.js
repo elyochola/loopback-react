@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
 import ReactDOM from 'react-dom';
 import {RegistrationsForm} from './registrations';
-import {SessionsForm} from './sessions';
 import {Navbar} from './components/navbar';
 import {MainSection} from './components/mainSection'
 
@@ -23,6 +22,7 @@ class App extends Component {
 
 
 const mapStateToProps = (state) => {
+    console.log(state)
    return {
 
    }
