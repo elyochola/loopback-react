@@ -1,21 +1,21 @@
 import {connect} from 'react-redux'
 import React, { Component, PropTypes } from 'react'
-import {loginUser} from '../actions/index'
+import {signUpUser} from '../actions/index'
 // https://github.com/sotojuan/saga-login-flow/blob/master/app/components/Login.js
-class Login extends Component {
+class SignUp extends Component {
 
   constructor (props) {
     super(props)
 
-    this.onLoginClick = this.onLoginClick.bind(this)
+    this.onSignUpClick = this.onSignUpClick.bind(this)
   }
   
   render() {
     const { errorMessage } = this.props
     
     return (
-      <form className="text-center col-sm-6 col-sm-offset-3 white-bg" >
-        <h2> Sign in </h2>
+      <div className="text-center col-sm-6 col-sm-offset-3 white-bg" >
+        <h2> Sign up </h2>
         <div className="form-group">   
           <input type='text' ref='username' className="form-control" style={{ marginRight: '5px' }} placeholder='Username'/>
         </div>
@@ -24,44 +24,43 @@ class Login extends Component {
         </div>
         <div className="form-group">   
           <button onClick={(event) => this.handleClick(event)} className="btn btn-success">
-            Login
+            Sign up
           </button>
         </div>
         {errorMessage &&
           <p style={{color:'red'}}>{errorMessage}</p>
         }
-      </form>
+      </div>
     )
   }
 
 
   
   handleClick(event) {
+    event.preventDefault()
     const username = this.refs.username
     const password = this.refs.password
     const creds = { username: username.value.trim(), password: password.value.trim() }
-    this.onLoginClick(creds)
+    this.onSignUpClick(creds)
   }
 
-  onLoginClick(creds) {
-    this.props.dispatch(loginUser(creds))
-    console.log(this.props.gets)
+  onSignUpClick(creds) {
+    console.log(this.props)
+    this.props.dispatch(signUpUser(creds))
   }
-
-
 
 
 
 }
 
-Login.propTypes = {
-  onLoginClick: PropTypes.func.isRequired,
+SignUp.propTypes = {
+  onSignUpClick: PropTypes.func.isRequired,
   errorMessage: PropTypes.string
 }
 
 
 
-export default connect()(Login)
+export default connect()(SignUp)
 
 
 

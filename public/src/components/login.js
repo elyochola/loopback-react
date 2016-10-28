@@ -14,7 +14,7 @@ class Login extends Component {
     const { errorMessage } = this.props
     
     return (
-      <form className="text-center col-sm-6 col-sm-offset-3 white-bg" >
+      <div className="text-center col-sm-6 col-sm-offset-3 white-bg" >
         <h2> Sign in </h2>
         <div className="form-group">   
           <input type='text' ref='username' className="form-control" style={{ marginRight: '5px' }} placeholder='Username'/>
@@ -30,7 +30,7 @@ class Login extends Component {
         {errorMessage &&
           <p style={{color:'red'}}>{errorMessage}</p>
         }
-      </form>
+      </div>
     )
   }
 

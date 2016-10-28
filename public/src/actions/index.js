@@ -15,6 +15,16 @@ function requestLogin(creds) {
   }
 }
 
+function requestSignUp(creds) {
+  return {
+    type: SIGN_UP_REQUEST,
+    isFetching: true,
+    isAuthenticated: false,
+    creds
+  }
+}
+
+
 function receiveLogin(user) {
   return {
     type: LOGIN_SUCCESS,
@@ -37,9 +47,10 @@ function loginError(message) {
 // Since we are using JWTs, we just need to remove the token
 // from localStorage. These actions are more useful if we
 // were calling the API to log the user out
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
-export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
+export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST'
+export const LOGOUT_REQUEST  = 'LOGOUT_REQUEST'
+export const LOGOUT_SUCCESS  = 'LOGOUT_SUCCESS'
+export const LOGOUT_FAILURE  = 'LOGOUT_FAILURE'
 
 function requestLogout() {
   return {
@@ -71,6 +82,41 @@ export function loginUser(creds) {
     // We dispatch requestLogin to kickoff the call to the API
     dispatch(requestLogin(creds))
     return fetch('http://localhost:3000/api/appUsers/login', config)
+      .then(response =>
+        response.json()
+        .then(user => ({ user, response }))
+      ).then(({ user, response }) =>  {
+        if (!response.ok) {
+          // If there was a problem, we want to
+          // dispatch the error condition
+          dispatch(loginError(user.message))
+          return Promise.reject(user)
+        }
+        else {
+          // If login was successful, set the token in local storage
+          localStorage.setItem('id_token', user.id_token)
+          
+          // Dispatch the success action
+          dispatch(receiveLogin(user))
+        }
+      }).catch(err => console.log("Error: ", err))
+  }
+}
+
+
+
+export function signUpUser(creds) {
+  
+  let config = {
+    method: 'POST',
+    headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+    body: `email=${creds.username}&password=${creds.password}`
+  }
+  
+  return dispatch => {
+    // We dispatch requestLogin to kickoff the call to the API
+    dispatch(requestSignUp(creds))
+    return fetch('http://localhost:3000/api/appUsers', config)
       .then(response =>
         response.json()
         .then(user => ({ user, response }))

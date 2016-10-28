@@ -4,33 +4,6 @@ import Login from './login'
 import Logout from './logout'
 
 
-// export class Navbar extends Component {
-  
-//   render() {
-//     const { dispatch, isAuthenticated, errorMessage } = this.props
-//     return (
-//       <nav className='navbar navbar-default'>
-//         <div className='container-fluid'>
-//           <a className="navbar-brand" href="#">Quotes App</a>
-//            <div className='navbar-form'>
-           
-//            {!isAuthenticated &&
-//              <Login
-//                errorMessage={errorMessage}
-//                onLoginClick={ creds => dispatch(loginUser(creds)) }
-//              />
-//            }
-           
-//            {isAuthenticated &&
-//              <Logout onLogoutClick={() => dispatch(logoutUser())} />
-//            }
-         
-//          </div>
-//        </div>
-//      </nav>
-//     )
-//   }
-
 // }
 
 
@@ -40,13 +13,11 @@ export class Navbar extends Component {
   render() {
     const { dispatch, isAuthenticated, errorMessage } = this.props
     return (
-      <nav className='navbar navbar-default'>
-        <div className='container-fluid'>
+      <nav className='navbar'>
           <ul>
-            <Link to="/api/appUsers" className='btn btn-primary pull-right '   >Registration</Link>
-            <Link to="/api/appUsers/login" className='btn btn-primary pull-right mr20' >Session</Link>
+            <Link to="/sign_up" className='btn btn-primary pull-right '   >Registration</Link>
+            <Link to="/login" className='btn btn-primary pull-right mr20' >Session</Link>
           </ul>
-       </div>
      </nav>
     )
   }
