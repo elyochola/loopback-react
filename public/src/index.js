@@ -17,6 +17,10 @@ import api from './middlewares/api'
 const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, api)(createStore)
 const store = createStoreWithMiddleware(rootReducer)
 
+store.subscribe(() => {
+  console.log(store.getState());
+});
+
 
 ReactDOM.render(
   <Provider store={store}>

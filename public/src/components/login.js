@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import React, { Component, PropTypes } from 'react'
-import {loginUser} from '../actions/index'
+import {loginUser} from '../actions/authentication'
 // https://github.com/sotojuan/saga-login-flow/blob/master/app/components/Login.js
 class Login extends Component {
 
@@ -50,8 +50,6 @@ class Login extends Component {
 
 
 
-
-
 }
 
 Login.propTypes = {
@@ -61,7 +59,7 @@ Login.propTypes = {
 
 
 
-export default connect()(Login)
+export default connect(state => ({ cards: 'state.cards' }))(Login)
 
 
 

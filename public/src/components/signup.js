@@ -1,13 +1,11 @@
 import {connect} from 'react-redux'
 import React, { Component, PropTypes } from 'react'
-import {signUpUser} from '../actions/index'
+import {signUpUser} from '../actions/authentication'
 // https://github.com/sotojuan/saga-login-flow/blob/master/app/components/Login.js
 class SignUp extends Component {
 
-  constructor (props) {
+  constructor (props, context) {
     super(props)
-
-    this.onSignUpClick = this.onSignUpClick.bind(this)
   }
   
   render() {
@@ -45,8 +43,10 @@ class SignUp extends Component {
   }
 
   onSignUpClick(creds) {
-    console.log(this.props)
     this.props.dispatch(signUpUser(creds))
+    if (this.props.state.auth.isAuthenticated == true) {
+       this.props.history.push('/')
+    }
   }
 
 
@@ -60,7 +60,7 @@ SignUp.propTypes = {
 
 
 
-export default connect()(SignUp)
+export default connect(state => ({ state: state }))(SignUp)
 
 
 
