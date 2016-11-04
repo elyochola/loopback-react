@@ -26,11 +26,12 @@ function requestSignUp(creds) {
 
 
 function receiveLogin(user) {
+  console.log(user)
   return {
     type: LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    token: user.token
+    token: user.id
   }
 }
 
@@ -72,21 +73,26 @@ function receiveLogout() {
 // dispatches actions along the way
 export function loginUser(creds) {
   
-  let config = {
-    method: 'POST',
-    headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-    body: `email=${creds.username}&password=${creds.password}`
-  }
-  
   return dispatch => {
-    // We dispatch requestLogin to kickoff the call to the API
     dispatch(requestLogin(creds))
-    return fetch('http://localhost:3000/api/appUsers/login', config)
+
+    return fetch('http://localhost:3000/api/appUsers/login', {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: 'string@gogo.com',
+          password: 'password',
+        }),
+      })
       .then(response =>
         response.json()
         .then(user => ({ user, response }))
       ).then(({ user, response }) =>  {
         if (!response.ok) {
+
           // If there was a problem, we want to
           // dispatch the error condition
           dispatch(loginError(user.message))
@@ -94,10 +100,10 @@ export function loginUser(creds) {
         }
         else {
           // If login was successful, set the token in local storage
-          localStorage.setItem('id_token', user.id_token)
-          
+          localStorage.setItem('token', user.id)
+        
           // Dispatch the success action
-          dispatch(receiveLogin(user.user))
+          dispatch(receiveLogin(user))
         }
       }).catch(err => console.log("Error: ", err))
   }
@@ -129,8 +135,8 @@ export function signUpUser(creds) {
         }
         else {
           // If login was successful, set the token in local storage
-
-          localStorage.setItem('token', user.user.token)
+          console.log(user)
+          localStorage.setItem('token', user.user.id)
           localStorage.setItem('userId', user.user.userId)
           // Dispatch the success action
           dispatch(receiveLogin(user))

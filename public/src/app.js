@@ -22,7 +22,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
    return {
-     something: 'state.something',
+     
    }
 };
 const mapDispatchToProps = (dispatch) => {

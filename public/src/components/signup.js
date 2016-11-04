@@ -45,7 +45,7 @@ class SignUp extends Component {
   onSignUpClick(creds) {
     this.props.dispatch(signUpUser(creds))
     if (this.props.state.auth.isAuthenticated == true) {
-       this.props.history.push('/')
+       this.props.history.push('/profil')
     }
   }
 
