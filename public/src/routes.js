@@ -10,13 +10,15 @@ import App from './app';
 
 export class Routes extends Component {
 
+
   render () {
+
     return (
             <Router history={browserHistory}>
               <Route path="/" component={App}/>
               <Route path="/sign_up"   component={SignUp} url="/sign_up"  />
               <Route path="/login"     component={Login} url="/login"   />
-              <Route path="/profil"    component={Profil} url="/profil"   />
+               <Route path="/profil"    component={Profil}   />
             </Router>
            ) 
 

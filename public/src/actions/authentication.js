@@ -31,7 +31,8 @@ function receiveLogin(user) {
     type: LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    token: user.id
+    token: user.id,
+    userId: user.userId
   }
 }
 
@@ -100,8 +101,9 @@ export function loginUser(creds) {
         }
         else {
           // If login was successful, set the token in local storage
+          localStorage.clear()
           localStorage.setItem('token', user.id)
-        
+          localStorage.setItem('userId', user.userId)
           // Dispatch the success action
           dispatch(receiveLogin(user))
         }
@@ -120,6 +122,7 @@ export function signUpUser(creds) {
   }
   
   return dispatch => {
+    dispatch(requestSignUp(creds))
     // We dispatch requestLogin to kickoff the call to the API
     dispatch(requestSignUp(creds))
     return fetch('http://localhost:3000/api/appUsers', config)
@@ -136,6 +139,7 @@ export function signUpUser(creds) {
         else {
           // If login was successful, set the token in local storage
           console.log(user)
+          localStorage.clear()
           localStorage.setItem('token', user.user.id)
           localStorage.setItem('userId', user.user.userId)
           // Dispatch the success action

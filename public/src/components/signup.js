@@ -43,10 +43,15 @@ class SignUp extends Component {
   }
 
   onSignUpClick(creds) {
-    this.props.dispatch(signUpUser(creds))
-    if (this.props.state.auth.isAuthenticated == true) {
-       this.props.history.push('/profil')
-    }
+    localStorage.clear()
+    console.log(this.props)
+    this.props.dispatch(signUpUser(creds)).then(
+         () => {
+                if (this.props.state.auth.isAuthenticated == true) {
+                  this.props.history.push('/profil')
+                }  
+          
+    }); 
   }
 
 
