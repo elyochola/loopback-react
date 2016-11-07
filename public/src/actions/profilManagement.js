@@ -1,14 +1,20 @@
 import { CALL_API } from '../middlewares/api'
 
 
-export const PROFIL_REQUEST = 'PROFIL_REQUEST'
+
+export const PROFIL_SUCCESS = 'PROFIL_SUCCESS'
+
+function receiveUser(creds) {
+  return {
+    type: PROFIL_SUCCESS,
+    user: creds
+  }
+}
+
 
 
 export function getProfil(token, userId) {
-  console.log('getProfil')
-  
   return dispatch => {
-
     return fetch('http://localhost:3000/api/appUsers/' + userId, {
         method: 'get',
         headers: {
@@ -18,8 +24,17 @@ export function getProfil(token, userId) {
         }
        
       })
-      .then(function(response) {
-		  console.log(response.json());
-	  }).catch(err => console.log("Error: ", err))
+      .then(response =>
+        response.json()
+        .then(user => ({ user, response }))
+      ).then(({ user, response }) =>  {
+        if (!response.ok) {
+          return Promise.reject(user)
+        }
+        else {
+          dispatch(receiveUser(user))
+        
+        }
+      }).catch(err => console.log("Error: ", err))
   }
 }
