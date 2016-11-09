@@ -44,10 +44,13 @@ class Login extends Component {
   }
 
   onLoginClick(creds) {
-    this.props.dispatch(loginUser(creds))
-      if (this.props.state.auth.isAuthenticated == true) {
-       this.props.history.push('/profil')
-    }
+    this.props.dispatch(loginUser(creds)).then(
+         () => {
+                if (this.props.state.auth.isAuthenticated == true) {
+                  this.props.history.push('/profil')
+                }  
+          
+    });   
   }
 
 

@@ -4,14 +4,11 @@ import Login from './login'
 import Logout from './logout'
 
 
-// }
-
-
 
 export class Navbar extends Component {
   
   render() {
-    const { dispatch, isAuthenticated, errorMessage } = this.props
+    const { dispatch, errorMessage } = this.props
     return (
       <nav className='navbar'>
           <ul>
@@ -24,9 +21,3 @@ export class Navbar extends Component {
 
 }
 
-Navbar.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string
-
-  }

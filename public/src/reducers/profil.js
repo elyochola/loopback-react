@@ -1,13 +1,12 @@
-import { PROFIL_SUCCESS } from '../actions/index'
+import { PROFIL_SUCCESS, PROFIL_FAILURE} from '../actions/index'
 
 
 
 export default function profil(state = {
     user: "",
   }, action) {
-  console.log(action.type)
   switch (action.type) {
-    case PROFIL_SUCCESS:
+    case 'PROFIL_SUCCESS':
       return Object.assign({}, state, {
         user: action.user
       })

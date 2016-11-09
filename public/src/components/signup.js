@@ -58,10 +58,6 @@ class SignUp extends Component {
 
 }
 
-SignUp.propTypes = {
-  onSignUpClick: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string
-}
 
 
 

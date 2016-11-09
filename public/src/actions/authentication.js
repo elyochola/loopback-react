@@ -31,8 +31,8 @@ function receiveLogin(user) {
     type: LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    token: user.id,
-    userId: user.userId
+    token: user.user.id,
+    userId: user.user.userId
   }
 }
 
@@ -75,6 +75,7 @@ function receiveLogout() {
 export function loginUser(creds) {
   
   return dispatch => {
+
     dispatch(requestLogin(creds))
 
     return fetch('http://localhost:3000/api/appUsers/login', {
@@ -84,27 +85,29 @@ export function loginUser(creds) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: 'string@gogo.com',
-          password: 'password',
+          email: creds.username,
+          password: creds.password,
         }),
       })
       .then(response =>
         response.json()
         .then(user => ({ user, response }))
       ).then(({ user, response }) =>  {
+        console.log("user")
+        console.log(user)
+        console.log("response")
+        console.log(response)
         if (!response.ok) {
-
-          // If there was a problem, we want to
-          // dispatch the error condition
           dispatch(loginError(user.message))
           return Promise.reject(user)
         }
         else {
-          // If login was successful, set the token in local storage
+          // TODO debug token and userId value
           localStorage.clear()
           localStorage.setItem('token', user.id)
           localStorage.setItem('userId', user.userId)
-          // Dispatch the success action
+          
+
           dispatch(receiveLogin(user))
         }
       }).catch(err => console.log("Error: ", err))
@@ -138,7 +141,6 @@ export function signUpUser(creds) {
         }
         else {
           // If login was successful, set the token in local storage
-          console.log(user)
           localStorage.clear()
           localStorage.setItem('token', user.user.id)
           localStorage.setItem('userId', user.user.userId)

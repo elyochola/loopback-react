@@ -3,6 +3,7 @@ import { CALL_API } from '../middlewares/api'
 
 
 export const PROFIL_SUCCESS = 'PROFIL_SUCCESS'
+export const PROFIL_FAILURE = 'PROFIL_FAILURE'
 
 function receiveUser(creds) {
   return {

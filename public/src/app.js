@@ -35,11 +35,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps)(App);
-
-
-            // <div className="row">
-            //   <ul>
-            //      <Link to="/api/appUsers" className='btn btn-primary pull-right '  >Registration</Link>
-            //      <Link to="/api/appUsers/login" className='btn btn-primary pull-right mr20' >Session</Link>
-            //   </ul>
-            // </div>
