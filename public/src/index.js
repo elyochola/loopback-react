@@ -5,7 +5,6 @@ import {Router, Route, Link , browserHistory} from 'react-router';
 import {Provider} from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
-import {Alert, AlertBox,AlertList, AlertForm, AlertModal} from './home';
 import {createStore, applyMiddleware} from 'redux'
 import {rootReducer} from './reducers'
 import {Routes} from './routes'

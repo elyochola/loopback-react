@@ -18,20 +18,21 @@ export class Profil extends Component {
  	let userId = localStorage.getItem('userId')
  	this.props.dispatch(getProfil(token, userId)).then(
     () => { 
-      console.log('coucou')
       console.log(this.props)
     }
   )
+
+
  }
 
-    render() {
-        return (
-            <div className=" row text-center">
-              <h1> Vous êtes connecté en tant que {this.props.state.profil.user.email} </h1>
-            </div>
+render() {
+    return (
+        <div className=" row text-center">
+          <h1> Bonjour {this.props.state.profil.user.firstName} {this.props.state.profil.user.lastName} </h1>
+        </div>
 
-        );
-    }
+    );
+}
 
 
 }

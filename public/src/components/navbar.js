@@ -6,6 +6,10 @@ import Logout from './logout'
 
 
 export class Navbar extends Component {
+
+ constructor (props) {
+    super(props)
+  }
   
   render() {
     const { dispatch, errorMessage } = this.props

@@ -4,7 +4,9 @@ import ReactDOM from 'react-dom';
 import Profil from './components/profil';
 import Login from './components/login';
 import SignUp from './components/signUp';
-import App from './app';
+import Home from './components/home';
+
+
 // import { loginUser, logoutUser } from './actions/index'
 
 
@@ -15,7 +17,7 @@ export class Routes extends Component {
 
     return (
             <Router history={browserHistory}>
-              <Route path="/" component={App}/>
+              <Route path="/" component={Home}/>
               <Route path="/sign_up"   component={SignUp} url="/sign_up"  />
               <Route path="/login"     component={Login} url="/login"   />
                <Route path="/profil"    component={Profil}   />

@@ -1,12 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
 import ReactDOM from 'react-dom';
-import {Navbar} from './components/navbar';
-import {MainSection} from './components/mainSection'
+import {Navbar} from './navbar';
+import {MainSection} from './mainSection'
 
 // https://github.com/auth0-blog/redux-auth/blob/master/reducers.js
 
-class App extends Component {
+class Home extends Component {
   
   render() {
     const { dispatch, quote, isAuthenticated, errorMessage, isSecretQuote } = this.props
@@ -34,4 +34,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Home);

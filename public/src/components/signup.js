@@ -15,7 +15,13 @@ class SignUp extends Component {
       <div className="text-center col-sm-6 col-sm-offset-3 white-bg" >
         <h2> Sign up </h2>
         <div className="form-group">   
-          <input type='text' ref='username' className="form-control" style={{ marginRight: '5px' }} placeholder='Username'/>
+          <input type='text' ref='firstName' className="form-control" style={{ marginRight: '5px' }} placeholder='firname'/>
+        </div>
+        <div className="form-group">   
+          <input type='text' ref='lastName' className="form-control" style={{ marginRight: '5px' }} placeholder='lastname'/>
+        </div>
+        <div className="form-group">   
+          <input type='text' ref='email' className="form-control" style={{ marginRight: '5px' }} placeholder='email'/>
         </div>
         <div className="form-group">   
           <input type='password' ref='password' className="form-control" style={{ marginRight: '5px' }} placeholder='Password'/>
@@ -36,9 +42,15 @@ class SignUp extends Component {
   
   handleClick(event) {
     event.preventDefault()
-    const username = this.refs.username
-    const password = this.refs.password
-    const creds = { username: username.value.trim(), password: password.value.trim() }
+    const lastName  = this.refs.lastName
+    const firstName = this.refs.firstName
+    const email     = this.refs.email
+    const password  = this.refs.password
+    const creds     = { email: email.value.trim(), 
+                        password: password.value.trim(),
+                        lastName: lastName.value.trim(),
+                        firstName: firstName.value.trim()
+                      }
     this.onSignUpClick(creds)
   }
 

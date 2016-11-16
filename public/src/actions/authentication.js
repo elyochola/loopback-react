@@ -32,7 +32,8 @@ function receiveLogin(user) {
     isFetching: false,
     isAuthenticated: true,
     token: user.user.id,
-    userId: user.user.userId
+    userId: user.user.userId,
+    user
   }
 }
 
@@ -45,10 +46,7 @@ function loginError(message) {
   }
 }
 
-// Three possible states for our logout process as well.
-// Since we are using JWTs, we just need to remove the token
-// from localStorage. These actions are more useful if we
-// were calling the API to log the user out
+
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST'
 export const LOGOUT_REQUEST  = 'LOGOUT_REQUEST'
 export const LOGOUT_SUCCESS  = 'LOGOUT_SUCCESS'
@@ -85,7 +83,7 @@ export function loginUser(creds) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: creds.username,
+          email: creds.email,
           password: creds.password,
         }),
       })
@@ -121,7 +119,7 @@ export function signUpUser(creds) {
   let config = {
     method: 'POST',
     headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-    body: `email=${creds.username}&password=${creds.password}`
+    body: `email=${creds.email}&password=${creds.password}&lastName=${creds.lastName}&firstName=${creds.firstName}`
   }
   
   return dispatch => {

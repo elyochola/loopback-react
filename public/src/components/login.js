@@ -17,7 +17,7 @@ class Login extends Component {
       <div className="text-center col-sm-6 col-sm-offset-3 white-bg" >
         <h2> Sign in </h2>
         <div className="form-group">   
-          <input type='text' ref='username'  className="form-control" style={{ marginRight: '5px' }} placeholder='Username'/>
+          <input type='text' ref='email'  className="form-control" style={{ marginRight: '5px' }} placeholder='Username'/>
         </div>
         <div className="form-group">   
           <input type='password' ref='password' className="form-control" style={{ marginRight: '5px' }} placeholder='Password'/>
@@ -37,9 +37,9 @@ class Login extends Component {
 
   
   handleClick(event) {
-    const username = this.refs.username
+    const email = this.refs.email
     const password = this.refs.password
-    const creds = { username: username.value.trim(), password: password.value.trim() }
+    const creds = { email: email.value.trim(), password: password.value.trim() }
     this.onLoginClick(creds)
   }
 
