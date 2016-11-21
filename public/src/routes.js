@@ -5,6 +5,7 @@ import Profil from './components/profil';
 import Login from './components/login';
 import SignUp from './components/signUp';
 import Home from './components/home';
+import App from './components/app';
 
 
 // import { loginUser, logoutUser } from './actions/index'
@@ -17,10 +18,12 @@ export class Routes extends Component {
 
     return (
             <Router history={browserHistory}>
-              <Route path="/" component={Home}/>
-              <Route path="/sign_up"   component={SignUp} url="/sign_up"  />
-              <Route path="/login"     component={Login} url="/login"   />
-               <Route path="/profil"    component={Profil}   />
+              <Route path="/" component={App} >
+                <Route path="/home" component={Home}/>
+                <Route path="/sign_up"   component={SignUp} url="/sign_up"  />
+                <Route path="/login"     component={Login} url="/login"   />
+                <Route path="/profil"    component={Profil}   />
+              </Route>
             </Router>
            ) 
 

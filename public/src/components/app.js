@@ -4,16 +4,15 @@ import ReactDOM from 'react-dom';
 import {Navbar} from './navbar';
 import {MainSection} from './mainSection'
 
-// https://github.com/auth0-blog/redux-auth/blob/master/reducers.js
 
-class Home extends Component {
+class App extends Component {
   
   render() {
     
     return (
           <div>
              <Navbar/> 
-             <MainSection/>
+             {this.props.children}
           </div> 
     )
   }
@@ -22,4 +21,4 @@ class Home extends Component {
 
 
 
-export default connect()(Home);
+export default connect()(App);
