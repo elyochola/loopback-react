@@ -1,2 +1,2 @@
-import {signUpUser, loginUser} from './authentication';
+import {signUpUser, loginUser, checkUserState} from './authentication';
 import {getProfil} 				     from './profilManagement';

@@ -9,11 +9,11 @@ import {MainSection} from './mainSection'
 class Home extends Component {
   
   render() {
+   
     
     return (
           <div>
-             <Navbar/> 
-             <MainSection/>
+            <MainSection/> 
           </div> 
     )
   }
