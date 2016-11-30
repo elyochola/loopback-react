@@ -71,7 +71,8 @@ function receiveLogout() {
   }
 }
 
-function receiveUserStateConnected(userState){
+function receiveUserStateConnected(userState){ 
+  console.log(userState)
   return {
     type: STATE_CONNECTED,
     userState
@@ -127,7 +128,6 @@ export function loginUser(creds) {
 
 
 export function checkUserState() {
-
    var userState =  {isAuthenticated: localStorage.getItem('token') ? true : false} 
    return dispatch => {
      if (userState.isAuthenticated == true) {

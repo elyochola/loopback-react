@@ -10,6 +10,7 @@ import {rootReducer} from './reducers'
 import {Routes} from './routes'
 import api from './middlewares/api'
 
+
 // url="api/alerts" pollInterval={2000}
 // const loggerMiddleware = applyMiddleware(logger())
 const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, api)(createStore)

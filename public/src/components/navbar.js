@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import {connect} from 'react-redux'
 import {Router, Route, Link , browserHistory} from 'react-router';
-// import Login from './login'
-// import Logout from './logout'
 import {checkUserState} from '../actions/authentication'
 
 
@@ -11,7 +9,7 @@ class Navbar extends Component {
 
  constructor (props) {
     super(props)
-     
+    console.log(this.props.state.auth.isAuthenticated)
   }
 
 
@@ -21,19 +19,19 @@ class Navbar extends Component {
   
   render() {
 
-    if (this.props == 'undefined') {
+    if (this.props.state.auth.isAuthenticated == true) {
+       var partial = 
+          <ul>
+          <Link to="/sign_up" className='btn btn-primary pull-right '   >Logout</Link>
+          </ul>
           
-      var partial = 
-                <ul>
-                <Link to="/sign_up" className='btn btn-primary pull-right '   >Registration</Link>
-                <Link to="/login" className='btn btn-primary pull-right mr20' >Session</Link>
-                </ul>
     } else {
         var partial = 
-                <ul>
-                <Link to="/sign_up" className='btn btn-primary pull-right '   >Registration</Link>
-                <Link to="/login" className='btn btn-primary pull-right mr20' >Session</Link>
-                </ul>
+            <ul>
+            <Link to="/sign_up" className='btn btn-primary pull-right '   >Registration</Link>
+            <Link to="/login" className='btn btn-primary pull-right mr20' >Session</Link>
+            </ul>
+
 
     }            
 
@@ -47,6 +45,13 @@ class Navbar extends Component {
 
 }
 
-export default connect()(Navbar);
+
+const mapStateToProps = (state) => {
+  return {
+    state
+  }
+};
+
+export default connect(mapStateToProps)(Navbar);
 
 

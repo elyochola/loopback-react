@@ -18,7 +18,7 @@ export class Profil extends Component {
  	let userId = localStorage.getItem('userId')
  	this.props.dispatch(getProfil(token, userId)).then(
     () => { 
-      console.log(this.props)
+      
     }
   )
 

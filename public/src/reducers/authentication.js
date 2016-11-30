@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, STATE_CONNECTED, STATE_NOT_CONNECTED } from '../actions/index'
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS, STATE_CONNECTED, STATE_NOT_CONNECTED } from '../actions/authentication'
 
 
 
@@ -32,13 +32,16 @@ export default function auth(state = {
         isAuthenticated: false
       })
     case STATE_CONNECTED:
-      return Object.assign({}, state,{
+      console.log("coucou")
+      return Object.assign({}, state, {
+        isFetching: true,
         isAuthenticated: true
-      }) 
+      })
     case STATE_NOT_CONNECTED:
-      return Object.assign({}, state,{
+     return Object.assign({}, state, {
+        isFetching: true,
         isAuthenticated: false
-      })   
+      }) 
     default:
       return state
     }
