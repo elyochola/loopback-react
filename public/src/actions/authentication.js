@@ -1,7 +1,9 @@
 import { CALL_API } from '../middlewares/api'
+import { BASE_URL } from './index'
 
 // There are three possible states for our login
 // process and we need actions for each of them
+
 export const LOGIN_REQUEST          = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS          = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE          = 'LOGIN_FAILURE'
@@ -32,7 +34,6 @@ function requestSignUp(creds) {
 
 
 function receiveLogin(user) {
-  console.log(user)
   return {
     type: LOGIN_SUCCESS,
     isFetching: false,
@@ -72,7 +73,6 @@ function receiveLogout() {
 }
 
 function receiveUserStateConnected(userState){ 
-  console.log(userState)
   return {
     type: STATE_CONNECTED,
     userState
@@ -93,7 +93,7 @@ export function loginUser(creds) {
 
     dispatch(requestLogin(creds))
 
-    return fetch('http://localhost:3000/api/appUsers/login', {
+    return fetch('http://'+ BASE_URL + '/api/appUsers/login', {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -132,6 +132,7 @@ export function checkUserState() {
    return dispatch => {
      if (userState.isAuthenticated == true) {
         dispatch(receiveUserStateConnected(userState))
+
      } else {
         dispatch(receiveUserStateConnected(userState))
      }
@@ -152,7 +153,7 @@ export function signUpUser(creds) {
     dispatch(requestSignUp(creds))
     // We dispatch requestLogin to kickoff the call to the API
     dispatch(requestSignUp(creds))
-    return fetch('http://localhost:3000/api/appUsers', config)
+    return fetch('http://'+ BASE_URL + '/api/appUsers', config)
       .then(response =>
         response.json()
         .then(user => ({ user, response }))
@@ -177,12 +178,21 @@ export function signUpUser(creds) {
 
 // Logs the user out
 export function logoutUser() {
+
+    localStorage.removeItem('token')
+    localStorage.removeItem('userId')
+
+
   return dispatch => {
-    dispatch(requestLogout())
-    localStorage.removeItem('id_token')
-    dispatch(receiveLogout())
+    
+    return dispatch(receiveLogout())
+      
+      
   }
 }
+
+ 
+
 
 
 

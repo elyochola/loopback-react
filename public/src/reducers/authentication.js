@@ -32,7 +32,6 @@ export default function auth(state = {
         isAuthenticated: false
       })
     case STATE_CONNECTED:
-      console.log("coucou")
       return Object.assign({}, state, {
         isFetching: true,
         isAuthenticated: true

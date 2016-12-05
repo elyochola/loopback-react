@@ -1,5 +1,5 @@
 import { CALL_API } from '../middlewares/api'
-
+import { BASE_URL } from './index'
 
 
 export const PROFIL_SUCCESS = 'PROFIL_SUCCESS'
@@ -16,7 +16,7 @@ function receiveUser(creds) {
 
 export function getProfil(token, userId) {
   return dispatch => {
-    return fetch('http://localhost:3000/api/appUsers/' + userId, {
+    return fetch('http://'+ BASE_URL + '/api/appUsers/' + userId, {
         method: 'get',
         headers: {
           'Accept': 'application/json',
