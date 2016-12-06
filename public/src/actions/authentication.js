@@ -178,17 +178,8 @@ export function signUpUser(creds) {
 
 // Logs the user out
 export function logoutUser() {
-
-    localStorage.removeItem('token')
-    localStorage.removeItem('userId')
-
-
-  return dispatch => {
-    
-    return dispatch(receiveLogout())
-      
-      
-  }
+  localStorage.removeItem('token')
+  localStorage.removeItem('userId')
 }
 
  
